@@ -1,0 +1,49 @@
+.color-btn{
+	display: grid;
+	/*grid-template-columns: repeat(16, 20px);*/
+	gap: 2px;
+}
+.color-btn input {
+	display        : none;
+}
+.color-btn label{
+	cursor         : pointer;
+	width          : 20px;
+	height         : 20px;
+	background     : #bdc3c7;
+	display        : inline-block;
+	box-sizing     : border-box;
+}
+.color-btn input[type="checkbox"]:checked + .dot-btn {
+	background     : #007fff;
+}
+#text0{
+	width: 300px;
+	height: 4em;
+}
+.btn{
+	width:60px;
+}
+#nav {
+  list-style: none;
+  overflow: hidden;
+  margin: 0 ;
+	padding: 0 ;
+}
+ 
+#nav li {
+  width: 140px;
+  text-align: center;
+  background-color: #333;
+  float: left;
+}
+ 
+#nav li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+#main{
+	width : 960px;
+	margin : auto;
+}
