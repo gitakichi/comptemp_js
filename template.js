@@ -5,6 +5,7 @@ function header(){
 		<li><a href="index.html">top<a></li>
 		<li><a href="8x8.html">8x8<a></li>
 		<li><a href="comptemp.html">気温グラフ<a></li>
+		<li><a href="https://github.com/gitakichi"><i class="fab fa-github"></i></a></li>
 		</ul>
 	`;
 	var element = document.getElementById("header");

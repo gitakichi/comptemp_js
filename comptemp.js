@@ -124,6 +124,10 @@ function drawChart(city_len) {
 		};
 		console.log("chart of 3 dataset");
 	}
+	
+	if (window.mylineChart) {
+	 window.mylineChart.destroy();
+	}
 
 	window.mylineChart = new Chart(ctx, {
 		type: 'line',
@@ -149,6 +153,4 @@ function drawChart(city_len) {
 			},
 		}
 	});
-	$('#myLineChart').css('width','100%');
-	$('#myLineChart').css('height','450px');
 }
