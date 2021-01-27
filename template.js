@@ -10,4 +10,7 @@ function header(){
 	`;
 	var element = document.getElementById("header");
 	element.innerHTML = html_text;
+	
+	var element = document.getElementById("main");
+	element.style.display = "block";
 }

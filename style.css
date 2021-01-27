@@ -49,4 +49,5 @@ h1,h2,h3{
 #main{
 	width : 960px;
 	margin : auto;
+	display : none;
 }
