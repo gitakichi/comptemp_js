@@ -8,6 +8,8 @@ var kanji2 = "都市3";
 var htemp2 = [0,0,0,0,0,0,0,0,0,0,0,0];
 var ltemp2 = [0,0,0,0,0,0,0,0,0,0,0,0];
 
+var cursor = 0;
+
 function citylist(){
 	var html_text = `<select id=\"city0\">\n`;
 	for(var i = 0;i < weather.length;i++){
@@ -154,3 +156,35 @@ function drawChart(city_len) {
 		}
 	});
 }
+
+function init() {
+	//ズームコントロールを非表示で地図を作成
+	var map = L.map('mapcontainer', { zoomControl: false });
+	map.setView([35.40, 136], 5);
+	L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+	  attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+	}).addTo(map);
+	
+	var markers=[];
+	
+	for(var i = 0;i < weather.length;i++){
+		//L.marker([weather[i]['lat'],weather[i]['lng']],{title:weather[i]['kanji']}).addTo(map);
+		markers[i] = L.marker([weather[i]['lat'],weather[i]['lng']],{title:weather[i]['kanji']}).addTo(map).on( 'click', function(e) {  clickEvt(e); });
+		markers[i].code = i;
+	}
+
+
+	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
+	L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(map);
+	//ズームコントロールを左下で地図に追加
+	L.control.zoom({ position: 'bottomleft' }).addTo(map);
+}
+
+function clickEvt(e){
+    //alert("コード＝ "+ e.target.code );
+    if(cursor < 3){
+    	document.getElementById(`city${cursor}`).selectedIndex = e.target.code;
+    	cursor++;
+    }
+  }
+

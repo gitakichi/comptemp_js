@@ -8,8 +8,10 @@
 <title>気温グラフ</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
 <script src="template.js"></script>
 <script src="weather.js"></script>
 <script src="comptemp.js"></script>
@@ -18,6 +20,10 @@
 	width : 100%;
 	height : 450px;
 }
+#mapcontainer{
+	width:100%;
+	height:450px;
+}
 </style>
 </head>
 <body>
@@ -25,7 +31,7 @@
 <div id="main">
 	<h2>気温グラフ</h2>
 	<div id="selector_area"></div>
-	
+	<div id="mapcontainer"></div>
 	<h3>結果</h3>
 	
 	<div class="chart-container">
@@ -36,6 +42,7 @@
 <script>
 header();
 citylist();
+init();
 drawChart(1);
 </script>
 
