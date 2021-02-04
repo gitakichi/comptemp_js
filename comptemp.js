@@ -11,19 +11,19 @@ var ltemp2 = [0,0,0,0,0,0,0,0,0,0,0,0];
 var cursor = 0;
 
 function citylist(){
-	var html_text = `<select id=\"city0\">\n`;
+	var html_text = `<select id=\"city0\" onchange=\"cursor=1;\">\n`;
 	for(var i = 0;i < weather.length;i++){
 		html_text += `<option value=\"${i}\">${weather[i]['kanji']}</option>\n`;
 	}
 	html_text += `</select>\n`;
 	
-	html_text += `<select id=\"city1\">\n`;
+	html_text += `<select id=\"city1\" onchange=\"cursor=2;\">\n`;
 	for(var i = 0;i < weather.length;i++){
 		html_text += `<option value=\"${i}\">${weather[i]['kanji']}</option>\n`;
 	}
 	html_text += `</select>\n`;
 	
-	html_text += `<select id=\"city2\">\n`;
+	html_text += `<select id=\"city2\" onchange=\"drawChart(3);\">\n`;
 	for(var i = 0;i < weather.length;i++){
 		html_text += `<option value=\"${i}\">${weather[i]['kanji']}</option>\n`;
 	}
@@ -161,8 +161,8 @@ function init() {
 	//ズームコントロールを非表示で地図を作成
 	var map = L.map('mapcontainer', { zoomControl: false });
 	map.setView([35.40, 136], 5);
-	L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
-	  attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	  attribution: '<a href="https://openstreetmap.org">OpenStreetMap</a>'
 	}).addTo(map);
 	
 	var markers=[];
@@ -172,6 +172,8 @@ function init() {
 		markers[i] = L.marker([weather[i]['lat'],weather[i]['lng']],{title:weather[i]['kanji']}).addTo(map).on( 'click', function(e) {  clickEvt(e); });
 		markers[i].code = i;
 	}
+	
+	//markers[0].setIcon({icon:L.spriteIcon('red')});
 
 
 	//スケールコントロールを最大幅200px、右下、m単位で地図に追加
@@ -182,9 +184,14 @@ function init() {
 
 function clickEvt(e){
     //alert("コード＝ "+ e.target.code );
-    if(cursor < 3){
+    if(cursor <= 1){
     	document.getElementById(`city${cursor}`).selectedIndex = e.target.code;
     	cursor++;
+    }
+    else if(cursor == 2){
+    	document.getElementById(`city${cursor}`).selectedIndex = e.target.code;
+    	cursor = 0;
+    	drawChart(3);
     }
   }
 
